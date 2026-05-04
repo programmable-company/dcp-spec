@@ -1,6 +1,6 @@
-# Agentic Company Protocol
+# Declarative Company Protocol
 
-The Agentic Company Protocol (ACP) is an open specification for representing, governing, and operating companies as machine-readable, cryptographically-signed artifacts. It is being drafted Estonia-first, building on existing European digital identity and signing infrastructure, with the aim of enabling agentic systems to act as first-class counterparties in company operations — governance, finance, compliance, and legal identity.
+The Declarative Company Protocol (DCP) is an open specification for representing, governing, and operating companies as machine-readable, cryptographically-signed artifacts. It is being drafted Estonia-first, building on existing European digital identity and signing infrastructure, with the aim of enabling agentic systems to act as first-class counterparties in company operations — governance, finance, compliance, and legal identity.
 
 **Status: pre-alpha.** This repository currently contains only the protocol's stated vision, guiding principles, and governance model. No specification drafts have been published yet. Specification work will land in the [`specification/`](specification/) directory over the coming months.
 
