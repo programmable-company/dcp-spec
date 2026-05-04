@@ -59,7 +59,7 @@ Every conformant entity MUST declare at least:
 
 A repository's full capability set is the `capabilities` field of `entity.json`. Capability negotiation, the discovery cache, and version compatibility are described in [§06](06-capability-negotiation.md).
 
-The `params` field is capability-specific. Programmable Company itself imposes no constraint on its contents beyond JCS-canonicalizable JSON (see [§04](04-canonicalization.md)).
+The `params` field is capability-specific. Declarative Company itself imposes no constraint on its contents beyond JCS-canonicalizable JSON (see [§04](04-canonicalization.md)).
 
 ## Document
 
@@ -134,7 +134,7 @@ Downstream capability specifications introduce additional event types under thei
 
 ### Why projection, not document
 
-A Programmable Company's authoritative state is the event log; `entity.json` is a derivative. This rule exists because:
+A Declarative Company's authoritative state is the event log; `entity.json` is a derivative. This rule exists because:
 
 - The log is the only structure that can record *when* a fact became true. A document at HEAD records only what is true now.
 - The log is what an external party (a court, a registry, a counterparty) replays to settle disputes about what was true at a given moment.
@@ -186,7 +186,7 @@ The `Entity` is the projection of the company at HEAD. Its definition lives in [
 
 ### Identifier conventions
 
-The recommended form for `Entity.id` is a URN in the `pc:` namespace, with a profile-specific subnamespace. For Estonia, the form is:
+The recommended form for `Entity.id` is a URN in the `pc:` namespace, with a profile-specific subnamespace. The `pc:` namespace is owned by the Programmable Company project and is shared across all of the project's specifications, so an entity's `id` is stable across the introduction of the future programmable-layer specification — adopting that layer does not require re-identifying the entity. For Estonia, the form is:
 
 ```
 pc:ee:registrikood:<8-digit registrikood>

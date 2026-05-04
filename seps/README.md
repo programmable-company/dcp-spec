@@ -1,6 +1,6 @@
 # SEPs — Specification Enhancement Proposals
 
-A **Specification Enhancement Proposal** (SEP) is the change-control mechanism for Programmable Company. Substantive changes to the core specification, the schema, or any profile are introduced through a SEP: the proposal is drafted, discussed, and resolved, and the resolution is what lands in the next dated draft.
+A **Specification Enhancement Proposal** (SEP) is the change-control mechanism for the Programmable Company project. Substantive changes to any of the project's specifications (currently: Declarative Company), to a schema, or to any profile are introduced through a SEP: the proposal is drafted, discussed, and resolved, and the resolution is what lands in the next dated draft.
 
 The SEP process is modeled on Python's [PEP-1](https://peps.python.org/pep-0001/) and the Model Context Protocol's [SEP process](https://github.com/modelcontextprotocol/modelcontextprotocol). It is intentionally lightweight in this pre-alpha phase; it is expected to formalize as the specification matures.
 
@@ -25,7 +25,7 @@ A SEP is **not** required for editorial changes (typos, clearer phrasing, exampl
 
 ## When a SEP is allowed without being required
 
-Anything that affects how Programmable Company is implemented or perceived MAY be a SEP, even if not strictly required. New module specifications (`accounting/v1`, etc.) are SEPs by construction: each module is a substantive addition.
+Anything that affects how the project's specifications are implemented or perceived MAY be a SEP, even if not strictly required. New module specifications (`accounting/v1`, etc.) are SEPs by construction: each module is a substantive addition. The eventual programmable-layer specification will arrive through SEPs as well.
 
 ## Numbering
 

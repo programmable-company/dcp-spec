@@ -1,23 +1,23 @@
 # Estonia profile
 
-This directory contains the Estonia jurisdictional profile for Programmable Company. It binds the jurisdiction-neutral core specification (under [`specification/<DATE>/`](../../specification/)) to Estonian law, registries, and digital-state infrastructure.
+This directory contains the Estonia jurisdictional profile for **Declarative Company**, the data-layer specification of the Programmable Company project. It binds the jurisdiction-neutral core specification (under [`specification/<DATE>/`](../../specification/)) to Estonian law, registries, and digital-state infrastructure.
 
 ## Purpose
 
 The core specification leaves jurisdictional details deliberately abstract: legal forms, identifier types, registry resolution, trust anchors, and identity-binding semantics are profile-defined. The Estonia profile fills these in for entities registered in the Republic of Estonia.
 
-The profile is the jurisdiction-specific layer that makes a Programmable Company *operational* in Estonia. A repository declaring `Entity.profile = "estonia"` MUST satisfy both the core specification and the additional requirements set out in this profile.
+The profile is the jurisdiction-specific layer that makes a Declarative Company *operational* in Estonia. A repository declaring `Entity.profile = "estonia"` MUST satisfy both the core specification and the additional requirements set out in this profile.
 
 ## Why Estonia first
 
-Programmable Company is being drafted Estonia-first because the preconditions are operational here rather than aspirational:
+The Programmable Company project is being drafted Estonia-first because the preconditions are operational here rather than aspirational:
 
 - **Legal-person identity** is state-issued (registrikood) and stable.
 - **Personal identity** is cryptographic and universal — Smart-ID, Mobile-ID, ID-card — and produces eIDAS-qualified electronic signatures.
 - **State interoperability** runs on X-Road, production infrastructure for over two decades.
 - **Tax, registry, and statutory filings** are already API-accessible.
 
-The Estonia profile binds Programmable Company to these primitives. It does not invent new ones.
+The Estonia profile binds Declarative Company to these primitives. It does not invent new ones.
 
 See [`../../VISION.md`](../../VISION.md) for the longer argument.
 
@@ -38,7 +38,7 @@ Skeletons describe *what* will be specified, not *how*. The full profile is a do
 ## What this profile is not
 
 - Not a rewrite of Estonian company law. Where this profile and applicable law differ, applicable law governs.
-- Not a replacement for RIK, EMTA, or any other state service. The profile binds Programmable Company artifacts to those services; it does not duplicate or supersede them.
+- Not a replacement for RIK, EMTA, or any other state service. The profile binds Declarative Company artifacts to those services; it does not duplicate or supersede them.
 - Not the only profile. Other jurisdictions are expected to publish their own profiles under [`profiles/<jurisdiction>/`](../) once the core specification stabilizes.
 
 ## Versioning

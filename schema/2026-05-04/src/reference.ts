@@ -24,7 +24,7 @@ export interface Reference {
 
   /**
    * Optional resolution hint. May be a relative path within the same
-   * Programmable Company repository (e.g. `events/2026/2026-05-04-genesis.json`)
+   * Declarative Company repository (e.g. `events/2026/2026-05-04-genesis.json`)
    * or any RFC 3986 URI. Resolvers MUST verify the resolved bytes against
    * `hash` before treating them as authoritative.
    */

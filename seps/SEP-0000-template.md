@@ -20,7 +20,7 @@
 
 ## Motivation
 
-> *Why is this change needed? What problem does it solve? What goes wrong if Programmable Company does nothing?*
+> *Why is this change needed? What problem does it solve? What goes wrong if the project does nothing?*
 >
 > *Cite specific places in the specification or schema that exhibit the problem. Link to the relevant specification sections (`specification/<DATE>/<file>.md`) and schema files (`schema/<DATE>/src/<file>.ts`).*
 

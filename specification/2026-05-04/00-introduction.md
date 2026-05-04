@@ -2,34 +2,36 @@
 
 ## What this specification is
 
-This specification defines **Programmable Company**, an open data format for representing companies as machine-readable, cryptographically-signed, version-controlled artifacts. A conforming Programmable Company is a Git repository whose contents — the entity's identity, its append-only log of signed events, its declared capabilities, and the documents attached to those events — describe the company precisely enough that humans, agentic systems, and government services can act on the same shared representation without bespoke integration.
+This is **Declarative Company**, the data-layer specification published by the Programmable Company project. It defines an open format for representing companies as machine-readable, cryptographically-signed, version-controlled artifacts. A conforming Declarative Company is a Git repository whose contents — the entity's identity, its append-only log of signed events, its declared capabilities, and the documents attached to those events — describe the company precisely enough that humans, agentic systems, and government services can act on the same shared representation without bespoke integration.
 
-Programmable Company is published under the MIT License. There is no licensing tier, no commercial gatekeeping, and no privileged implementation. See [`../../GOVERNANCE.md`](../../GOVERNANCE.md) for stewardship.
+The Programmable Company project is published under the MIT License. There is no licensing tier, no commercial gatekeeping, and no privileged implementation. See [`../../GOVERNANCE.md`](../../GOVERNANCE.md) for stewardship.
 
-## Scope of this draft: the declarative layer
+## How this specification fits in the project
 
-Programmable Company is being specified in two layers:
+Programmable Company — the project — is being developed in two layered specifications. Declarative Company, defined by this document, is the first; the second is deferred:
 
-- The **declarative layer**, defined by this specification, is what a company *looks like* as data at rest: the file layout of a conforming repository, the JSON shapes of its entities, the canonicalization and signature rules, the capability declaration mechanism. The declarative layer is consumable by any tool that reads JSON and verifies JWS signatures. No runtime is required.
-- The **programmable layer**, deferred to a future specification, is how agents, humans, and state services *interact* with a company at runtime: capability negotiation over the wire, mandate-checked actions, cross-jurisdictional message flows.
+- **Declarative Company (this specification)** — the data layer. What a company *looks like* as data at rest: the file layout of a conforming repository, the JSON shapes of its entities, the canonicalization and signature rules, the capability declaration mechanism. The declarative layer is consumable by any tool that reads JSON and verifies JWS signatures. No runtime is required.
+- **The programmable-layer specification** — deferred to a future draft of the project. Will define how agents, humans, and state services *interact* with a Declarative Company at runtime: capability negotiation over the wire, mandate-checked actions, cross-jurisdictional message flows.
 
-This draft scopes only the declarative layer. Where the prose refers to "the specification" without qualification, it refers to the declarative-layer specification dated `2026-05-04`.
+The split exists so the data layer can stabilize independently. A representation that an agent can *read* and a registry can *verify* is useful long before any standardized runtime exists. Declarative Company is the intermediate step on the way to fully programmable companies; this specification is the contract for that step.
+
+Where the prose below refers to "this specification" without qualification, it refers to the Declarative Company specification dated `2026-05-04`. References to "the project" mean Programmable Company.
 
 ## Out of scope for this draft
 
 The following are **not** specified here. Several are anticipated as downstream specifications; some are explicit non-goals.
 
-- Runtime / interaction protocols (deferred to the programmable layer).
+- Runtime / interaction protocols (deferred to the programmable-layer specification).
 - Module-level capability semantics — accounting, compliance, people, payments, and similar — beyond defining the capability declaration mechanism itself. Each module is expected to be specified in its own document under its own SEP.
 - Software development kits in any language. Only the schema package is published here.
-- User interfaces. Programmable Company says nothing about how company data is displayed to humans.
+- User interfaces. Declarative Company says nothing about how company data is displayed to humans.
 - Replacement of legal systems. Where this specification and applicable law differ, applicable law governs.
 
 ## Audience
 
 This specification is written for three audiences in parallel:
 
-- **Engineers** building tools that read, write, sign, or verify Programmable Company artifacts.
+- **Engineers** building tools that read, write, sign, or verify Declarative Company artifacts.
 - **Lawyers and registry staff** evaluating the specification's compatibility with company law and registry practice in their jurisdiction.
 - **Policy reviewers** assessing whether the specification is aligned with the digital-state agendas it is intended to interoperate with.
 
@@ -37,7 +39,7 @@ Where these audiences need different things, the prose is structured so each can
 
 ## Conformance levels
 
-A Programmable Company artifact is **conformant** to this specification if and only if it satisfies, jointly:
+A Declarative Company artifact is **conformant** to this specification if and only if it satisfies, jointly:
 
 1. The repository structure requirements of [§02](02-repository-structure.md).
 2. The entity-model requirements of [§03](03-entity-model.md), validating against the schema in [`schema/2026-05-04/`](../../schema/2026-05-04/).
@@ -52,7 +54,7 @@ A repository MAY declare additional capabilities beyond `core/identity` and `cor
 
 ## Relationship to existing standards
 
-Programmable Company composes existing standards rather than inventing new ones:
+Declarative Company composes existing standards rather than inventing new ones:
 
 - **JSON** (RFC 8259) for artifact format.
 - **JCS** (RFC 8785) for canonicalization of signed content.

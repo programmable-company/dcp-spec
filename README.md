@@ -1,45 +1,45 @@
 # Programmable Company
 
-Programmable Company is an open specification for representing companies as machine-readable, cryptographically-signed, version-controlled artifacts. A conforming company is a Git repository whose contents — identity, governance documents, signed events, declared capabilities — describe the company precisely enough that humans, agentic systems, and government services can act on the same shared representation, without bespoke integration.
+**Programmable Company** is the open project developing a family of specifications under which companies can be represented, governed, and operated as machine-readable, cryptographically-signed, version-controlled artifacts. The long-term vision — companies as first-class counterparties to the Agentic State, addressable by humans, agents, and government services through the same shared interfaces — is what gives the project its name.
 
-The specification is being drafted Estonia-first, building on existing European digital identity, signing, and registry infrastructure. It is explicitly not Estonia-exclusive; jurisdiction-specific bindings live in profiles, and the core specification is jurisdiction-neutral.
+The project is being drafted Estonia-first, building on existing European digital identity, signing, and registry infrastructure. It is explicitly not Estonia-exclusive; jurisdiction-specific bindings live in profiles, and the core specifications are jurisdiction-neutral.
 
-> Programmable Company was previously known as the Agentic Company Protocol. The repository was also briefly named the Declarative Company Protocol during a renaming pass; both prior names refer to the same project. The current name is **Programmable Company**.
+> Programmable Company was previously known as the Agentic Company Protocol. The repository was also briefly named the Declarative Company Protocol during a renaming pass; both prior names refer to the same project. The current project name is **Programmable Company**.
+
+## Two specifications, one project
+
+Programmable Company is being developed in two layered specifications:
+
+1. **Declarative Company** — the data layer. Defines what a company *looks like* as data at rest: the JSON shapes of its identity, its append-only event log, its signed documents, and its declared capabilities. The first draft, dated `2026-05-04`, is in this repository. Declarative Company is the intermediate step — the substrate on which the second layer will be built.
+2. **Programmable Company** *(the specification of the same name as the project)* — the runtime layer. Will define how agents, humans, and state services *interact* with a Declarative Company at runtime: capability negotiation over the wire, mandate-checked actions, cross-jurisdictional message flows. Out of scope for this repository today; will be drafted once the declarative substrate stabilizes.
+
+Naming convention: capital-letter **Programmable Company** without further qualification refers to the project / organization. Capital-letter **Declarative Company** refers to the data-layer specification. When the runtime layer is drafted, it will be referred to as the **Programmable Company specification** to disambiguate from the project name.
 
 ## Status
 
-**Pre-alpha.** The first specification draft, dated `2026-05-04`, is the initial coherent shape of the data layer. It defines the substrate: how a company is identified, how its artifacts are canonicalized and signed, how its history is recorded, and how it declares which capabilities it exposes. It is expected to change as the data layer is exercised against real Estonian and EU integrations.
+**Pre-alpha.** The first Declarative Company draft, dated `2026-05-04`, is the initial coherent shape of the data layer. It defines the substrate: how a company is identified, how its artifacts are canonicalized and signed, how its history is recorded, and how it declares which capabilities it exposes. It is expected to change as the data layer is exercised against real Estonian and EU integrations.
 
 This draft is not a tagged version. It is frozen by date, but consumers should expect the next dated version to break with it as the model is refined.
-
-## Declarative now, programmable later
-
-Programmable Company is being specified in two layers:
-
-- **Declarative layer (this draft).** What a company *looks like* as data: signed artifacts at rest, a content-addressable event log, declared capabilities, and the identity primitives that bind them. The declarative layer can be consumed by any tool that reads JSON and verifies JWS signatures. No runtime is required.
-- **Programmable layer (future spec).** How agents, humans, and state services *interact* with a company at runtime: capability negotiation over the wire, mandate-checked actions, cross-jurisdictional message flows. The programmable layer builds on the declarative substrate but is out of scope for this draft.
-
-The split exists so the declarative layer can stabilize independently. A company representation that an agent can *read* and a registry can *verify* is useful long before any standardized runtime exists.
 
 ## Repository layout
 
 | Path | Purpose |
 | --- | --- |
-| [`specification/2026-05-04/`](specification/2026-05-04/) | Normative prose for the `2026-05-04` draft. Read [`00-introduction.md`](specification/2026-05-04/00-introduction.md) first. |
-| [`schema/2026-05-04/`](schema/2026-05-04/) | TypeScript source of truth for the core entity types and the generated JSON Schema. |
+| [`specification/2026-05-04/`](specification/2026-05-04/) | Declarative Company specification, draft `2026-05-04`. Read [`00-introduction.md`](specification/2026-05-04/00-introduction.md) first. |
+| [`schema/2026-05-04/`](schema/2026-05-04/) | TypeScript source of truth and generated JSON Schema for the Declarative Company entity model, draft `2026-05-04`. |
 | [`profiles/estonia/`](profiles/estonia/) | Estonia-specific bindings: legal forms, identifier types, e-MTA and X-Road touchpoints. |
-| [`seps/`](seps/) | Specification Enhancement Proposals — the change-control mechanism. |
-| [`VISION.md`](VISION.md) | Why this exists. |
-| [`PRINCIPLES.md`](PRINCIPLES.md) | Constraints on specification decisions. |
-| [`GOVERNANCE.md`](GOVERNANCE.md) | How the specification is stewarded. |
+| [`seps/`](seps/) | Specification Enhancement Proposals — the change-control mechanism for the project's specifications. |
+| [`VISION.md`](VISION.md) | Why the project exists. |
+| [`PRINCIPLES.md`](PRINCIPLES.md) | Constraints on the project's specification decisions. |
+| [`GOVERNANCE.md`](GOVERNANCE.md) | How the project is stewarded. |
 | [`CHANGELOG.md`](CHANGELOG.md) | Dated history of repository-level changes. |
 
 ## Reading order
 
 1. [`VISION.md`](VISION.md) — the thesis.
 2. [`PRINCIPLES.md`](PRINCIPLES.md) — the constraints.
-3. [`specification/2026-05-04/00-introduction.md`](specification/2026-05-04/00-introduction.md) — what the draft is and is not.
-4. The remaining specification sections, in order.
+3. [`specification/2026-05-04/00-introduction.md`](specification/2026-05-04/00-introduction.md) — what the Declarative Company draft is and is not.
+4. The remaining Declarative Company sections, in order.
 5. [`profiles/estonia/`](profiles/estonia/) — if you are implementing against Estonian infrastructure.
 
 A motivated reader should be able to finish the draft in roughly thirty minutes.

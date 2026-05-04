@@ -1,12 +1,14 @@
 # Specification
 
-Programmable Company specification drafts live in dated subdirectories under this directory. Each draft is frozen once published; substantive changes go in a new dated directory.
+Specifications under the Programmable Company project live in dated subdirectories under this directory. Each draft is frozen once published; substantive changes go in a new dated directory.
+
+The current specification is **Declarative Company** — the data-layer specification. The future runtime/interaction layer (the *programmable-layer specification*) will be drafted once the data layer stabilizes; it is not in scope for this directory today.
 
 ## Drafts
 
-| Date | Status | Notes |
-| --- | --- | --- |
-| [`2026-05-04/`](2026-05-04/) | Pre-alpha | First draft. Defines the declarative substrate: repository structure, entity model, JCS canonicalization, JWS/JAdES signing, capability negotiation, versioning. |
+| Date | Specification | Status | Notes |
+| --- | --- | --- | --- |
+| [`2026-05-04/`](2026-05-04/) | Declarative Company | Pre-alpha | First draft. Defines the data substrate: repository structure, entity model, JCS canonicalization, JWS/JAdES signing, capability negotiation, versioning. |
 
 ## Companion artifacts
 
@@ -20,4 +22,4 @@ Programmable Company specification drafts live in dated subdirectories under thi
 
 Start with [`2026-05-04/00-introduction.md`](2026-05-04/00-introduction.md) for the current draft. The remaining sections (00 → 07) build the substrate in the order a producer would construct it. A motivated reader should finish in roughly thirty minutes.
 
-For repository-level context (vision, principles, governance), see the [repository root](../README.md).
+For project-level context (vision, principles, governance), see the [repository root](../README.md).

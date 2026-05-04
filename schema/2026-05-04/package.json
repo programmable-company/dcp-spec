@@ -1,7 +1,7 @@
 {
-  "name": "@programmable-company/schema-2026-05-04",
+  "name": "@programmable-company/declarative-company-2026-05-04",
   "version": "0.0.1",
-  "description": "Programmable Company schema, draft 2026-05-04. TypeScript source of truth and generated JSON Schema for the declarative entity model.",
+  "description": "Declarative Company schema, draft 2026-05-04. TypeScript source of truth and generated JSON Schema for the data-layer specification of the Programmable Company project.",
   "private": true,
   "license": "MIT",
   "type": "module",

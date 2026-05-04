@@ -1,6 +1,6 @@
 # 07 — Versioning
 
-This section defines how the Programmable Company specification itself is versioned, how repositories declare conformance to a version, and how versions are deprecated.
+This section defines how the Declarative Company specification itself is versioned, how repositories declare conformance to a version, and how versions are deprecated.
 
 ## Date-based, MCP-style versioning
 
@@ -85,7 +85,7 @@ When a profile is updated in a way that requires repository changes, profile aut
 
 ## Tooling guidance (informative)
 
-Tools implementing Programmable Company should:
+Tools implementing Declarative Company should:
 
 - Vendor the schema at the version they target. Do not fetch `schema.json` over the network at runtime; it is meant to be embedded.
 - Refuse to operate on repositories declaring a `$specVersion` the tool does not implement, rather than attempting best-effort interpretation.

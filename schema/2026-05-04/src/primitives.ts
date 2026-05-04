@@ -1,5 +1,5 @@
 /**
- * Primitive types used throughout the Programmable Company schema.
+ * Primitive types used throughout the Declarative Company schema.
  *
  * These are nominal aliases over `string` chosen for documentation and
  * generated-schema clarity; they do not perform runtime validation.
@@ -17,7 +17,7 @@
 export type Iso8601Date = string;
 
 /**
- * RFC 3339 / ISO 8601 date-time with explicit timezone designator. Programmable
+ * RFC 3339 / ISO 8601 date-time with explicit timezone designator. Declarative
  * Company timestamps MUST be UTC and SHOULD use the `Z` suffix.
  *
  * @pattern ^\d{4}-\d{2}-\d{2}T\d{2}:\d{2}:\d{2}(\.\d+)?(Z|[+-]\d{2}:\d{2})$
@@ -51,10 +51,12 @@ export type Uri = string;
 export type SpecVersion = string;
 
 /**
- * Stable identifier for a Programmable Company entity. The recommended form is
- * a `pc:` URN with a content-addressable suffix derived from the entity's
- * genesis event. Profiles MAY define alternative forms (e.g. registry-bound
- * URNs) provided they are globally unique within the profile's scope.
+ * Stable identifier for a Declarative Company entity. The recommended form is
+ * a `pc:` URN — owned by the Programmable Company project and shared across
+ * the project's specifications — with a content-addressable suffix derived
+ * from the entity's genesis event. Profiles MAY define alternative forms
+ * (e.g. registry-bound URNs) provided they are globally unique within the
+ * profile's scope.
  *
  * @pattern ^[a-z][a-z0-9+.-]*:.+$
  * @example "pc:ee:registrikood:14123456"

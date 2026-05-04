@@ -4,7 +4,7 @@ import type { Reference } from "./reference.js";
 /**
  * A single entry in the entity's append-only event log.
  *
- * Events are the canonical state record of a Programmable Company. Every
+ * Events are the canonical state record of a Declarative Company. Every
  * change to the entity — from formation to renaming to capability addition
  * to dissolution — is recorded as an event. The Entity document at HEAD is a
  * projection over this log; the log, not the projection, is authoritative.
@@ -59,7 +59,7 @@ export interface Event {
 
   /**
    * Event-type-specific payload. The shape is defined by the specification
-   * that introduces the `type`. Programmable Company itself only requires
+   * that introduces the `type`. Declarative Company itself only requires
    * that the payload be JCS-canonicalizable JSON.
    */
   payload: Record<string, unknown>;

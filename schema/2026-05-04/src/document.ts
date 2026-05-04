@@ -56,7 +56,7 @@ export interface Provenance {
 /**
  * Generic signed-artifact wrapper.
  *
- * Documents are the unit of attached content in a Programmable Company
+ * Documents are the unit of attached content in a Declarative Company
  * repository: bylaws, resolutions, mandates, attachments to events, and
  * any other artifact that needs to be referenced by hash and verified by
  * signature.
