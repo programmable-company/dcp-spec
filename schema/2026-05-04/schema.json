@@ -1,0 +1,472 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "definitions": {
+    "CapabilityId": {
+      "type": "string",
+      "description": "Capability identifier. Lowercase, slash-separated namespace path. The first segment denotes the namespace (`core`, `accounting`, `compliance`, etc.); subsequent segments narrow the capability within that namespace.",
+      "examples": [
+        "core/identity"
+      ],
+      "pattern": "^[a-z][a-z0-9-]*(\\/[a-z0-9][a-z0-9-]*)+$"
+    },
+    "CountryCode": {
+      "type": "string",
+      "description": "ISO 3166-1 alpha-2 country code, uppercase. Used to scope identifiers, legal forms, and jurisdictions.",
+      "examples": [
+        "EE"
+      ],
+      "pattern": "^[A-Z]{2}$"
+    },
+    "DocumentId": {
+      "type": "string",
+      "description": "Stable identifier for a Document. Recommended form: a content-addressable URN derived from the canonicalized document hash, optionally namespaced by document type.",
+      "minLength": 1
+    },
+    "EntityId": {
+      "type": "string",
+      "description": "Stable identifier for a DCP entity. The recommended form is a `pc:` URN — owned by the Programmable Company project and shared across the project's specifications — with a content-addressable suffix derived from the entity's genesis event. Profiles MAY define alternative forms (e.g. registry-bound URNs) provided they are globally unique within the profile's scope.",
+      "examples": [
+        "pc:ee:registrikood:14123456"
+      ],
+      "pattern": "^[a-z][a-z0-9+.-]*:.+$"
+    },
+    "EventId": {
+      "type": "string",
+      "description": "Stable identifier for a single event in the entity's append-only log. Recommended form: ULID, RFC 4122 UUIDv7, or any monotonic identifier whose lexical order matches creation order. Validators MUST treat the value as opaque.",
+      "minLength": 1
+    },
+    "Iso8601Date": {
+      "type": "string",
+      "description": "RFC 3339 / ISO 8601 calendar date in `YYYY-MM-DD` form. UTC-anchored, no time component.",
+      "examples": [
+        "2026-05-04"
+      ],
+      "pattern": "^\\d{4}-\\d{2}-\\d{2}$",
+      "format": "date"
+    },
+    "Iso8601DateTime": {
+      "type": "string",
+      "description": "RFC 3339 / ISO 8601 date-time with explicit timezone designator. DCP timestamps MUST be UTC and SHOULD use the `Z` suffix.",
+      "examples": [
+        "2026-05-04T09:30:00Z"
+      ],
+      "pattern": "^\\d{4}-\\d{2}-\\d{2}T\\d{2}:\\d{2}:\\d{2}(\\.\\d+)?(Z|[+-]\\d{2}:\\d{2})$",
+      "format": "date-time"
+    },
+    "SemVer": {
+      "type": "string",
+      "description": "Semantic version (`MAJOR.MINOR.PATCH`), per semver.org, optionally followed by `-<pre-release>` and/or `+<build>` metadata. Used for capability versions and for tooling versions recorded in provenance.",
+      "examples": [
+        "1.0.0"
+      ],
+      "pattern": "^(0|[1-9]\\d*)\\.(0|[1-9]\\d*)\\.(0|[1-9]\\d*)(?:-[0-9A-Za-z-]+(?:\\.[0-9A-Za-z-]+)*)?(?:\\+[0-9A-Za-z-]+(?:\\.[0-9A-Za-z-]+)*)?$"
+    },
+    "Sha256Hex": {
+      "type": "string",
+      "description": "Lowercase hexadecimal SHA-256 digest, exactly 64 characters.",
+      "examples": [
+        "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      ],
+      "pattern": "^[0-9a-f]{64}$"
+    },
+    "SpecVersion": {
+      "type": "string",
+      "description": "Specification version, expressed as the date the version was frozen, in `YYYY-MM-DD` form. See `specification/<DATE>/07-versioning.md` for semantics.",
+      "examples": [
+        "2026-05-04"
+      ],
+      "pattern": "^\\d{4}-\\d{2}-\\d{2}$"
+    },
+    "Uri": {
+      "type": "string",
+      "description": "RFC 3986 URI. Used for non-resolving identifiers and resolution hints.",
+      "format": "uri"
+    },
+    "Reference": {
+      "type": "object",
+      "properties": {
+        "hash": {
+          "$ref": "#/definitions/Sha256Hex",
+          "description": "Hexadecimal SHA-256 digest of the canonicalized referenced artifact."
+        },
+        "hashAlg": {
+          "type": "string",
+          "const": "sha-256",
+          "description": "Hash algorithm. The 2026-05-04 draft requires `sha-256` for all references. Future drafts MAY broaden this set; consumers MUST reject references whose `hashAlg` they do not recognize."
+        },
+        "uri": {
+          "$ref": "#/definitions/Uri",
+          "description": "Optional resolution hint. May be a relative path within the same DCP repository (e.g. `events/2026/2026-05-04-genesis.json`) or any RFC 3986 URI. Resolvers MUST verify the resolved bytes against `hash` before treating them as authoritative."
+        },
+        "mediaType": {
+          "type": "string",
+          "description": "Optional IANA media type of the referenced artifact."
+        }
+      },
+      "required": [
+        "hash",
+        "hashAlg"
+      ],
+      "additionalProperties": false,
+      "description": "A content-addressed pointer to another artifact.\n\nThe `hash` is the digest of the canonicalized bytes of the referenced artifact (see `04-canonicalization.md`). Two references with identical `hash` and `hashAlg` MUST be treated as referring to the same content.\n\n`uri` is a resolution hint, not part of identity. Verifiers MUST recompute the hash from the resolved bytes; they MUST NOT trust a URI to certify that the referenced bytes are the bytes that were signed."
+    },
+    "Identifier": {
+      "type": "object",
+      "properties": {
+        "type": {
+          "type": "string",
+          "description": "Identifier type, in dotted lowercase namespace form.\n\nThe first segment is the issuing namespace:   - `ee.*` — Estonian state-issued identifiers (`ee.registrikood`,     `ee.kmkr`, `ee.emtak`).   - `eu.*` — EU-wide identifiers (`eu.euid`, `eu.lei`).   - `iso.*` — ISO-defined identifiers (`iso.lei`, `iso.duns`).\n\nProfiles MUST register their identifier types in the corresponding profile document; unregistered types MAY be used but consumers are not required to interpret them.",
+          "examples": [
+            "ee.registrikood"
+          ],
+          "pattern": "^[a-z][a-z0-9-]*(\\.[a-z0-9][a-z0-9-]*)+$"
+        },
+        "value": {
+          "type": "string",
+          "description": "Identifier value. Format is defined by the corresponding `type`. Profiles SHOULD specify regular expressions or check-digit procedures for their identifier types."
+        },
+        "issuer": {
+          "type": "string",
+          "description": "Free-text issuer label. Informational; verifiers MUST NOT rely on this field for trust decisions. Trust is established by the `type` namespace and the profile that defines it.",
+          "examples": [
+            "Centre of Registers and Information Systems (RIK)"
+          ]
+        },
+        "scope": {
+          "anyOf": [
+            {
+              "$ref": "#/definitions/CountryCode"
+            },
+            {
+              "type": "string",
+              "const": "EU"
+            },
+            {
+              "type": "string",
+              "const": "GLOBAL"
+            }
+          ],
+          "description": "Geographic or jurisdictional scope of the identifier. Either an ISO 3166-1 alpha-2 country code or one of the reserved values `EU` or `GLOBAL`."
+        },
+        "validFrom": {
+          "$ref": "#/definitions/Iso8601Date",
+          "description": "Date from which the identifier became valid for this entity."
+        },
+        "validUntil": {
+          "$ref": "#/definitions/Iso8601Date",
+          "description": "Date on which the identifier ceased to be valid for this entity. Absence of this field MUST be interpreted as \"still valid as of HEAD.\" Once set, a future event MUST NOT reset it; expired identifiers are retained in the Entity projection until purged by a separate revocation event."
+        }
+      },
+      "required": [
+        "type",
+        "value"
+      ],
+      "additionalProperties": false,
+      "description": "A typed identifier carried by an entity.\n\nIdentifiers are namespaced by their `type` so that the same numeric or alphanumeric value can coexist across registries without collision (e.g. an Estonian registrikood and a German Handelsregisternummer are distinct even if their digits happen to match)."
+    },
+    "Capability": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "$ref": "#/definitions/CapabilityId",
+          "description": "Capability identifier in `<namespace>/<name>[/<sub>...]` form.\n\n- `core/identity` — entity identity, identifiers, naming. Mandatory.\n- `core/lifecycle` — formation, name change, dissolution events. Mandatory.\n- `accounting/*`, `compliance/*`, `people/*`, etc. — downstream module   specifications, each defined by its own document."
+        },
+        "version": {
+          "$ref": "#/definitions/SemVer",
+          "description": "Semantic version of the capability specification this entity claims conformance to. Consumers MUST treat differing major versions as incompatible."
+        },
+        "params": {
+          "type": "object",
+          "additionalProperties": {},
+          "description": "Capability-specific configuration parameters. The shape is defined by the capability specification. DCP itself imposes no constraint beyond JCS-canonicalizable JSON."
+        }
+      },
+      "required": [
+        "id",
+        "version"
+      ],
+      "additionalProperties": false,
+      "description": "Declaration that an entity supports a given capability.\n\nCapabilities are the unit of opt-in functionality in DCP. The `core/identity` and `core/lifecycle` capabilities are mandatory for every conforming entity; everything else is opt-in.\n\nThe semantics of each capability — the artifacts it requires, the events it emits, the runtime interactions it implies — are defined by the specification document that introduces the capability. The Capability object only declares *that* the capability is exposed and at what version; it does not by itself constrain behavior."
+    },
+    "ContentByReference": {
+      "type": "object",
+      "properties": {
+        "inline": {
+          "type": "boolean",
+          "const": false
+        },
+        "ref": {
+          "$ref": "#/definitions/Reference"
+        }
+      },
+      "required": [
+        "inline",
+        "ref"
+      ],
+      "additionalProperties": false,
+      "description": "Document content stored elsewhere and referenced by content hash.\n\nRequired for any document large enough that inlining would bloat the artifact, or for binary documents (e.g. PDFs) whose bytes are best kept outside the JSON envelope."
+    },
+    "ContentInline": {
+      "type": "object",
+      "properties": {
+        "inline": {
+          "type": "boolean",
+          "const": true
+        },
+        "encoding": {
+          "type": "string",
+          "enum": [
+            "utf-8",
+            "base64"
+          ],
+          "description": "Encoding of `data`."
+        },
+        "mediaType": {
+          "type": "string",
+          "description": "IANA media type of the decoded bytes."
+        },
+        "data": {
+          "type": "string",
+          "description": "The encoded bytes."
+        }
+      },
+      "required": [
+        "inline",
+        "encoding",
+        "mediaType",
+        "data"
+      ],
+      "additionalProperties": false,
+      "description": "Inline document content, encoded directly in the artifact.\n\nSuitable for short, JSON-native payloads (e.g. a structured resolution body) or small binary attachments encoded as base64."
+    },
+    "Document": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "$ref": "#/definitions/DocumentId",
+          "description": "Identifier for the document, stable across the document's lifetime."
+        },
+        "type": {
+          "type": "string",
+          "description": "Document type, namespaced. Examples: `core/bylaws`, `core/resolution`, `core/mandate`, `attachments/pdf`. The semantics of each type are defined by the introducing capability specification.",
+          "pattern": "^[a-z][a-z0-9-]*(\\/[a-z0-9][a-z0-9-]*)+$"
+        },
+        "content": {
+          "anyOf": [
+            {
+              "$ref": "#/definitions/ContentInline"
+            },
+            {
+              "$ref": "#/definitions/ContentByReference"
+            }
+          ],
+          "description": "Content of the document — either inline or referenced by hash."
+        },
+        "provenance": {
+          "$ref": "#/definitions/Provenance",
+          "description": "Provenance metadata."
+        }
+      },
+      "required": [
+        "id",
+        "type",
+        "content",
+        "provenance"
+      ],
+      "additionalProperties": false,
+      "description": "Generic signed-artifact wrapper.\n\nDocuments are the unit of attached content in a DCP repository: bylaws, resolutions, mandates, attachments to events, and any other artifact that needs to be referenced by hash and verified by signature.\n\nSignatures are stored out-of-band by default (sidecar `.jws` files; see `05-signing.md`). A document MAY embed signatures via the `_sig` field for transports where sidecars are inconvenient; when both are present, verifiers MUST ensure they agree."
+    },
+    "Provenance": {
+      "type": "object",
+      "properties": {
+        "createdAt": {
+          "$ref": "#/definitions/Iso8601DateTime",
+          "description": "Time at which the document was produced."
+        },
+        "createdBy": {
+          "type": "string",
+          "description": "Identity of the producer. The recommended form is a key identifier (a `kid` value resolvable to a JWS key). Profiles MAY define richer identity forms (e.g. an Estonian Mobile-ID phone number bound to a personal identification code)."
+        },
+        "supersedes": {
+          "$ref": "#/definitions/Reference",
+          "description": "Reference to the prior version of this document, if any. A document SHOULD NOT be edited in place; producing a new document with `supersedes` pointing at the old one preserves the audit trail."
+        }
+      },
+      "required": [
+        "createdAt",
+        "createdBy"
+      ],
+      "additionalProperties": false,
+      "description": "Provenance metadata for a document — who produced it, when, and what (if anything) it supersedes."
+    },
+    "Event": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "$ref": "#/definitions/EventId",
+          "description": "Stable opaque identifier for this event."
+        },
+        "type": {
+          "type": "string",
+          "description": "Event type, namespaced. The first segment denotes the capability that defines the event semantics; the remainder names the event within that capability.\n\nCore events defined by this specification:   - `core.lifecycle.formed` — genesis event; MUST be the first event in     the log and MUST NOT have a `parent`.   - `core.lifecycle.renamed` — change to the entity's `name`.   - `core.lifecycle.identifier-added` — new `Identifier` attached.   - `core.lifecycle.identifier-revoked` — existing `Identifier` revoked.   - `core.lifecycle.capability-added` — capability declared.   - `core.lifecycle.capability-removed` — capability withdrawn.   - `core.lifecycle.dissolved` — terminal event; no further events MAY     reference this entity after `dissolved`.\n\nDownstream capability specifications introduce their own event types.",
+          "pattern": "^[a-z][a-z0-9-]*(\\.[a-z0-9][a-z0-9-]*)+$"
+        },
+        "timestamp": {
+          "$ref": "#/definitions/Iso8601DateTime",
+          "description": "Time at which the event was produced."
+        },
+        "actor": {
+          "type": "string",
+          "description": "Identity of the actor responsible for the event. Same form as `Document.provenance.createdBy`: typically a `kid` resolvable to a JWS key, possibly enriched per profile."
+        },
+        "parent": {
+          "$ref": "#/definitions/Reference",
+          "description": "Hash reference to the immediate predecessor event in the log. MUST be absent on the genesis (`core.lifecycle.formed`) event, MUST be present and resolvable on every other event. Together, the `parent` chain forms a hash-linked log that detects out-of-order or omitted entries."
+        },
+        "payload": {
+          "type": "object",
+          "additionalProperties": {},
+          "description": "Event-type-specific payload. The shape is defined by the specification that introduces the `type`. DCP itself only requires that the payload be JCS-canonicalizable JSON."
+        },
+        "refs": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/Reference"
+          },
+          "description": "References to documents or other artifacts associated with this event. For example, a `core.lifecycle.formed` event SHOULD reference the formation document; a resolution event references the resolution Document."
+        }
+      },
+      "required": [
+        "id",
+        "type",
+        "timestamp",
+        "actor",
+        "payload"
+      ],
+      "additionalProperties": false,
+      "description": "A single entry in the entity's append-only event log.\n\nEvents are the canonical state record of a DCP repository. Every change to the entity — from formation to renaming to capability addition to dissolution — is recorded as an event. The Entity document at HEAD is a projection over this log; the log, not the projection, is authoritative.\n\nEach event MUST be signed (sidecar `.jws`, see `05-signing.md`). Events MUST NOT be modified after they are committed; corrections take the form of a new event whose `type` and `payload` describe the correction."
+    },
+    "Entity": {
+      "type": "object",
+      "properties": {
+        "$schema": {
+          "$ref": "#/definitions/Uri",
+          "description": "JSON Schema URI. Optional; included by convention so that editors and validators can resolve the schema without out-of-band configuration.",
+          "examples": [
+            "https://programmable.company/declarative-company-protocol/2026-05-04/schema.json"
+          ]
+        },
+        "$specVersion": {
+          "$ref": "#/definitions/SpecVersion",
+          "description": "Specification version this entity claims conformance to. MUST match the dated specification under which the document is interpreted. See `07-versioning.md`."
+        },
+        "id": {
+          "$ref": "#/definitions/EntityId",
+          "description": "Stable identifier for the entity."
+        },
+        "profile": {
+          "type": "string",
+          "description": "Profile under which the entity is interpreted. The core specification is jurisdiction-neutral; jurisdictional bindings (legal forms, identifier types, registry semantics) come from the profile. The profile name MUST resolve to a profile document in `profiles/<profile>/`.",
+          "examples": [
+            "estonia"
+          ]
+        },
+        "legalForm": {
+          "type": "string",
+          "description": "Profile-defined legal form code. The set of permitted values is specified by the profile (e.g. for `estonia`: `OÜ`, `AS`, `FIE`, `MTÜ`)."
+        },
+        "jurisdiction": {
+          "$ref": "#/definitions/CountryCode",
+          "description": "ISO 3166-1 alpha-2 jurisdiction code under which the entity is registered. MUST match the jurisdiction implied by `profile`; if a profile spans multiple jurisdictions it MUST define the validation rule."
+        },
+        "name": {
+          "type": "string",
+          "description": "Human-readable legal name. Profiles MAY specify casing or character-set constraints (e.g. Estonian registry-name conventions). Changes to `name` MUST be recorded as `core.lifecycle.renamed` events."
+        },
+        "formedAt": {
+          "$ref": "#/definitions/Iso8601Date",
+          "description": "Date on which the entity was legally formed. Derived from the `core.lifecycle.formed` event; immutable thereafter."
+        },
+        "dissolvedAt": {
+          "$ref": "#/definitions/Iso8601Date",
+          "description": "Date on which the entity was dissolved, if applicable. Set by a `core.lifecycle.dissolved` event; once set, the entity MUST NOT emit further events."
+        },
+        "identifiers": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/Identifier"
+          },
+          "description": "Active typed identifiers attached to the entity."
+        },
+        "capabilities": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/Capability"
+          },
+          "description": "Capabilities declared by the entity. MUST include `core/identity` and `core/lifecycle`; MAY include any additional capabilities the entity exposes."
+        },
+        "head": {
+          "$ref": "#/definitions/Reference",
+          "description": "Reference to the most recent event applied to produce this projection. Verifiers MUST replay events from genesis up to and including the referenced event and confirm that the resulting projection equals this Entity document."
+        }
+      },
+      "required": [
+        "$specVersion",
+        "id",
+        "profile",
+        "legalForm",
+        "jurisdiction",
+        "name",
+        "formedAt",
+        "identifiers",
+        "capabilities",
+        "head"
+      ],
+      "additionalProperties": false,
+      "description": "The Entity document — the declarative projection of a DCP repository.\n\nAn Entity document at HEAD describes the company's *current state* as derived from the append-only event log. It is provided for ergonomics: consumers that do not wish to replay the entire log can read the projection directly. The log, not this document, is the source of truth; verifiers MUST be able to recompute this document by replaying every signed event in `events/` and MUST reject any HEAD whose Entity projection diverges from the replay result.\n\nThe Entity document at HEAD is therefore mutable across commits but deterministic given the event log up to that commit."
+    },
+    "Conformance": {
+      "type": "object",
+      "properties": {
+        "$specVersion": {
+          "$ref": "#/definitions/SpecVersion",
+          "description": "Specification version this repository targets."
+        },
+        "profile": {
+          "type": "string",
+          "description": "Profile name (matches `Entity.profile`)."
+        },
+        "capabilities": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "properties": {
+              "id": {
+                "$ref": "#/definitions/CapabilityId"
+              },
+              "version": {
+                "$ref": "#/definitions/SemVer"
+              }
+            },
+            "required": [
+              "id",
+              "version"
+            ],
+            "additionalProperties": false
+          },
+          "description": "Capability summary, mirroring `Entity.capabilities`."
+        }
+      },
+      "required": [
+        "$specVersion",
+        "profile",
+        "capabilities"
+      ],
+      "additionalProperties": false,
+      "description": "Repository-level conformance descriptor.\n\nStored at `.programmable-company/conformance.json` in a conforming repository. Tooling reads this file first to determine which specification version, profile, and capability set to apply when interpreting the rest of the repository.\n\nThe conformance file is informational metadata for tooling; the authoritative declarations live on the Entity document (`$specVersion`, `profile`, `capabilities`). When the two disagree, the Entity document wins and tooling SHOULD warn."
+    }
+  },
+  "$id": "https://programmable.company/declarative-company-protocol/2026-05-04/schema.json",
+  "title": "Declarative Company Protocol — schema (2026-05-04 draft)",
+  "description": "JSON Schema for Declarative Company Protocol, the data-layer specification of the Programmable Company project. Generated from the TypeScript source of truth at schema/2026-05-04/src. Do not edit by hand. Regenerate with `npm run build:schema`."
+}
