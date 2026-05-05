@@ -4,7 +4,7 @@
 
 The project is being drafted Estonia-first, building on existing European digital identity, signing, and registry infrastructure. It is explicitly not Estonia-exclusive; jurisdiction-specific bindings live in profiles, and the core specifications are jurisdiction-neutral.
 
-> Programmable Company was previously known as the Agentic Company Protocol. The name "Declarative Company Protocol" was briefly used for the project itself during a renaming pass; it is now the name of the project's first specification (see below). The current project name is **Programmable Company**, hosted at [programmable.company](https://programmable.company).
+> The protocol underlying this work was originally drafted as the Agentic Company Protocol, then renamed to the Declarative Company Protocol. With this draft, the project takes the umbrella name **Programmable Company** (hosted at [programmable.company](https://programmable.company)), and *Declarative Company Protocol* (DCP) becomes the name of the project's first specification — the data layer (see below).
 
 ## Two specifications, one project
 

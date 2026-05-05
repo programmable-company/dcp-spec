@@ -1,6 +1,6 @@
 # Governance
 
-*This document describes the current and intended governance of Programmable Company. It is pre-alpha and subject to refinement as the foundation is formed. Programmable Company was previously known as the Agentic Company Protocol.*
+*This document describes the current and intended governance of Programmable Company. It is pre-alpha and subject to refinement as the foundation is formed. The protocol underlying this project was originally drafted as the Agentic Company Protocol and then renamed to the Declarative Company Protocol; with this draft the project takes the umbrella name Programmable Company and Declarative Company Protocol (DCP) becomes the name of its first specification.*
 
 ## Current phase
 

@@ -1,6 +1,6 @@
 # Principles
 
-*These principles are pre-alpha and subject to revision. They are intended to constrain specification decisions, not to pre-empt them. Programmable Company was previously known as the Agentic Company Protocol; references to the older name in external material refer to the same project.*
+*These principles are pre-alpha and subject to revision. They are intended to constrain specification decisions, not to pre-empt them. The protocol underlying this project was originally drafted as the Agentic Company Protocol and then renamed to the Declarative Company Protocol; with this draft the project takes the umbrella name Programmable Company and Declarative Company Protocol (DCP) becomes the name of its first specification. References to the older names in external material refer to the same body of work.*
 
 1. **Open specification.** Programmable Company is published under the MIT License. There are no licensees, no tiers of access, and no commercial gatekeeping. Anyone may implement, extend, or build products on it.
 
