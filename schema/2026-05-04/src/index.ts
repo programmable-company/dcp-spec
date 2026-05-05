@@ -1,11 +1,10 @@
 /**
- * Declarative Company schema, draft 2026-05-04.
+ * Declarative Company Protocol (DCP) schema, draft 2026-05-04.
  *
- * Declarative Company is the data-layer specification of the Programmable
- * Company project. This module re-exports every type that constitutes the
- * declarative entity model. The TypeScript source under this directory is
- * the normative source of truth; `schema.json` at the package root is
- * generated from it.
+ * DCP is the data-layer specification of the Programmable Company project.
+ * This module re-exports every type that constitutes the declarative entity
+ * model. The TypeScript source under this directory is the normative source
+ * of truth; `schema.json` at the package root is generated from it.
  */
 
 export type {

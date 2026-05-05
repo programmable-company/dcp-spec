@@ -27,10 +27,10 @@ const schema = createGenerator(config).createSchema(config.type);
 
 const meta = {
   ...schema,
-  $id: "https://programmable-company.org/declarative-company/2026-05-04/schema.json",
-  title: "Declarative Company — schema (2026-05-04 draft)",
+  $id: "https://programmable.company/declarative-company-protocol/2026-05-04/schema.json",
+  title: "Declarative Company Protocol — schema (2026-05-04 draft)",
   description:
-    "JSON Schema for Declarative Company, the data-layer specification of the Programmable Company project. Generated from the TypeScript source of truth at schema/2026-05-04/src. Do not edit by hand. Regenerate with `npm run build:schema`.",
+    "JSON Schema for Declarative Company Protocol, the data-layer specification of the Programmable Company project. Generated from the TypeScript source of truth at schema/2026-05-04/src. Do not edit by hand. Regenerate with `npm run build:schema`.",
 };
 
 const out = JSON.stringify(meta, null, 2) + "\n";

@@ -4,20 +4,20 @@
 
 ## What X-Road is
 
-[X-Road](https://www.ria.ee/en/state-information-system/x-tee.html) is Estonia's data-exchange layer between state services and authorized non-state systems. It has been production infrastructure for over twenty years. From a Declarative Company perspective, X-Road is significant because:
+[X-Road](https://www.ria.ee/en/state-information-system/x-tee.html) is Estonia's data-exchange layer between state services and authorized non-state systems. It has been production infrastructure for over twenty years. From a DCP perspective, X-Road is significant because:
 
 - Many state services that an Estonian legal person interacts with — RIK, EMTA, TÖR, e-Health, Police and Border Guard, the Land Register, others — are reachable as X-Road services.
 - X-Road authorization is itself a form of capability declaration: a subsystem registered on X-Road has a stable identifier, a defined set of services it can call, and signed message exchanges that constitute its interactions.
-- The cryptographic substrate X-Road uses is consistent with the eIDAS infrastructure Declarative Company adopts for signing.
+- The cryptographic substrate X-Road uses is consistent with the eIDAS infrastructure DCP adopts for signing.
 
 ## What this section will specify
 
 The Estonia profile, once expanded, will specify:
 
-- **X-Road subsystem identification.** How a Declarative Company that operates an X-Road subsystem declares it. Likely as a capability (`ee.x-road/v1`) whose `params` include the subsystem identifier (`<member-class>/<member-code>/<subsystem-code>`).
+- **X-Road subsystem identification.** How a DCP repository that operates an X-Road subsystem declares it. Likely as a capability (`ee.x-road/v1`) whose `params` include the subsystem identifier (`<member-class>/<member-code>/<subsystem-code>`).
 - **Service-call event semantics.** The event types that record outgoing X-Road service calls and incoming responses. Most of these will live in the `compliance/*` and `accounting/*` modules that exercise X-Road; the profile records the binding from those modules to the X-Road capability.
 - **Identity handling.** How the personal-identification or legal-person identifier carried in an X-Road service-call header maps to `Event.actor` / `Document.provenance.createdBy`.
-- **Mutual authentication.** How X-Road's service-call authentication artifacts are preserved and verifiable in the Declarative Company log.
+- **Mutual authentication.** How X-Road's service-call authentication artifacts are preserved and verifiable in the DCP event log.
 - **Request and response retention.** How X-Road message bodies — typically substantial XML — are retained as `Document` content (most likely by reference, not inline).
 
 ## Where the boundary sits
@@ -28,13 +28,13 @@ The declarative-layer specification does not concern itself with the *act* of ma
 - A signed response document.
 - An event linking them.
 
-Tooling that operates on the Declarative Company repository can verify these artifacts after the fact without participating in the X-Road call itself. This separation is deliberate: it means archived Declarative Companies remain auditable even after X-Road message-bus implementations evolve.
+Tooling that operates on a DCP repository can verify these artifacts after the fact without participating in the X-Road call itself. This separation is deliberate: it means archived DCP repositories remain auditable even after X-Road message-bus implementations evolve.
 
 ## Skeleton subsections (to be expanded)
 
 ### Subsystem registration
 
-> **Skeleton.** How a Declarative Company that intends to operate an X-Road subsystem records the registration. Probably a `core.lifecycle.capability-added` event introducing the `ee.x-road/v1` capability, with the subsystem identifier in `params`.
+> **Skeleton.** How a DCP repository that intends to operate an X-Road subsystem records the registration. Probably a `core.lifecycle.capability-added` event introducing the `ee.x-road/v1` capability, with the subsystem identifier in `params`.
 
 ### Service-call artifacts
 

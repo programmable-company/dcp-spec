@@ -56,10 +56,9 @@ export interface Provenance {
 /**
  * Generic signed-artifact wrapper.
  *
- * Documents are the unit of attached content in a Declarative Company
- * repository: bylaws, resolutions, mandates, attachments to events, and
- * any other artifact that needs to be referenced by hash and verified by
- * signature.
+ * Documents are the unit of attached content in a DCP repository: bylaws,
+ * resolutions, mandates, attachments to events, and any other artifact that
+ * needs to be referenced by hash and verified by signature.
  *
  * Signatures are stored out-of-band by default (sidecar `.jws` files; see
  * `05-signing.md`). A document MAY embed signatures via the `_sig` field

@@ -1,8 +1,8 @@
 # 02 — Repository structure
 
-A Declarative Company is a Git repository. The repository is the unit of conformance: tooling that reads, validates, or signs artifacts operates over a repository, and a repository's history is part of its identity.
+A Declarative Company Protocol (DCP) repository is a Git repository. The repository is the unit of conformance: tooling that reads, validates, or signs artifacts operates over a repository, and a repository's history is part of its identity.
 
-This section defines the file and directory layout that makes a Git repository a conformant Declarative Company repository.
+This section defines the file and directory layout that makes a Git repository a conformant DCP repository.
 
 ## Required layout
 
@@ -102,7 +102,7 @@ These three views are linked. A consumer who wants to know what is true now read
 
 Implementations are not required to make all three views available to every consumer; conformance only requires that the views, when reconstructed, agree.
 
-## What MUST NOT appear in a Declarative Company repository
+## What MUST NOT appear in a DCP repository
 
 To keep the repository surface unambiguous, conformant repositories MUST NOT include any of the following at paths reserved by this specification:
 

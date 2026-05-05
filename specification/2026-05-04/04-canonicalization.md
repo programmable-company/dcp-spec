@@ -1,6 +1,6 @@
 # 04 — Canonicalization
 
-Signatures over JSON require a deterministic byte-level encoding: any two implementations that serialize "the same JSON value" must produce identical bytes, or signatures will fail to verify across implementations. Declarative Company adopts JSON Canonicalization Scheme ([RFC 8785](https://www.rfc-editor.org/rfc/rfc8785), "JCS") for this purpose.
+Signatures over JSON require a deterministic byte-level encoding: any two implementations that serialize "the same JSON value" must produce identical bytes, or signatures will fail to verify across implementations. DCP adopts JSON Canonicalization Scheme ([RFC 8785](https://www.rfc-editor.org/rfc/rfc8785), "JCS") for this purpose.
 
 ## What gets canonicalized
 

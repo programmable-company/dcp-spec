@@ -1,7 +1,7 @@
 {
-  "name": "@programmable-company/declarative-company-2026-05-04",
+  "name": "@programmable-company/dcp-2026-05-04",
   "version": "0.0.1",
-  "description": "Declarative Company schema, draft 2026-05-04. TypeScript source of truth and generated JSON Schema for the data-layer specification of the Programmable Company project.",
+  "description": "Declarative Company Protocol (DCP) schema, draft 2026-05-04. TypeScript source of truth and generated JSON Schema for the data-layer specification of the Programmable Company project. Project home: https://programmable.company",
   "private": true,
   "license": "MIT",
   "type": "module",

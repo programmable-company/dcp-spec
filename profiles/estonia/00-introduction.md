@@ -12,7 +12,7 @@ The core specification — under [`specification/<DATE>/`](../../specification/)
 
 - Restricts where the core specification leaves freedom (e.g. enumerating permitted `Entity.legalForm` values for Estonian entities).
 - Names trust anchors and key-resolution rules where the core specification defers to profiles (e.g. `kid` forms for Smart-ID, Mobile-ID, ID-card).
-- Adds requirements specific to Estonian context (e.g. mandating that a Declarative Company corresponding to a registered Estonian legal person carries an `ee.registrikood` identifier).
+- Adds requirements specific to Estonian context (e.g. mandating that a DCP repository corresponding to a registered Estonian legal person carries an `ee.registrikood` identifier).
 
 A repository conformant to the Estonia profile is conformant to the core specification by construction. The reverse is not true: a core-conformant repository declaring a different profile (or no profile) is not subject to Estonia profile rules.
 
@@ -49,4 +49,4 @@ These questions are deferred. They are surfaced here so reviewers can flag any t
 - Should the profile mandate that every event be signed at JAdES level B-T or higher (i.e. with a trusted timestamp)? Estonia has reliable TSAs; the answer is "probably yes, with TSA selection deferred to the operator," but it deserves a SEP-level discussion before being normative.
 - Should the profile require that a registered Estonian legal person's `Entity.id` be the `pc:ee:registrikood:<code>` form, or permit the `pc:genesis:<hash>` form? Probably the former for any entity that *has* a registry entry; the latter for pre-registration drafts. TODO(SEP-XXXX).
 - How does the profile express e-Residency? An e-resident-formed OÜ is structurally identical to a resident-formed OÜ, but some downstream consumers may want to distinguish. Probably as an Identifier (`ee.e-residency`) on the founder, not the company.
-- How does X-Road's authorization model map to Declarative Company's capability model? Probably as a capability (`ee.x-road/v1`) declaring the X-Road subsystem identifier. TODO(SEP-XXXX).
+- How does X-Road's authorization model map to DCP's capability model? Probably as a capability (`ee.x-road/v1`) declaring the X-Road subsystem identifier. TODO(SEP-XXXX).

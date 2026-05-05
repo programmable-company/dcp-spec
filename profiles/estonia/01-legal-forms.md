@@ -42,7 +42,7 @@ For each legal form, the full profile will define:
 
 ### `FIE` — Füüsilisest isikust ettevõtja (Sole proprietorship)
 
-> **Skeleton.** Distinguished by the entity being a natural person operating in commercial capacity. The `Entity.id` form, identifier requirements, and dissolution semantics differ materially from the corporate forms; the full profile will need to address whether a `FIE`'s Declarative Company identity is separable from the underlying natural person.
+> **Skeleton.** Distinguished by the entity being a natural person operating in commercial capacity. The `Entity.id` form, identifier requirements, and dissolution semantics differ materially from the corporate forms; the full profile will need to address whether a `FIE`'s DCP identity is separable from the underlying natural person.
 
 ### `MTÜ` — Mittetulundusühing (Non-profit association)
 
@@ -50,5 +50,5 @@ For each legal form, the full profile will define:
 
 ## Open questions
 
-- **Form changes.** Estonian law permits some inter-form transitions (e.g. `OÜ` → `AS`). Does Declarative Company model this as a `core.lifecycle.legalForm-changed` event, or as a dissolution-and-reformation? The full profile will need to take a position. TODO(SEP-XXXX).
+- **Form changes.** Estonian law permits some inter-form transitions (e.g. `OÜ` → `AS`). Does DCP model this as a `core.lifecycle.legalForm-changed` event, or as a dissolution-and-reformation? The full profile will need to take a position. TODO(SEP-XXXX).
 - **Branches.** Foreign-company branches registered in Estonia have a `registrikood` but are not themselves Estonian legal persons. The profile will need to decide whether they appear as Estonian-profile entities or as identifiers on foreign-profile entities.

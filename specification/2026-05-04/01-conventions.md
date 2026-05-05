@@ -19,17 +19,17 @@ The following terms have specific meanings in this specification. They are intro
 | Term | Meaning | Defined in |
 | --- | --- | --- |
 | **Programmable Company** | The project / organization developing this and future related specifications. Not a noun used to describe a single conforming company in this draft. | [`../../README.md`](../../README.md), [`../../GOVERNANCE.md`](../../GOVERNANCE.md) |
-| **Declarative Company** | This specification, taken as a whole, and (by extension) a company represented under it. The data-layer specification of the Programmable Company project. | This document |
+| **Declarative Company Protocol**, **DCP** | This specification, taken as a whole; the data-layer specification of the Programmable Company project. *DCP* is the abbreviation used in body text. | This document |
 | **Entity** | A legal person represented under this specification. The Entity document at HEAD is the declarative projection of the entity's state. | [§03](03-entity-model.md) |
 | **Identifier** | A typed, namespaced, optionally scoped reference that an entity carries (e.g. an Estonian registrikood). | [§03](03-entity-model.md) |
 | **Capability** | A declared opt-in module — a unit of functionality with its own specification — that the entity exposes. | [§03](03-entity-model.md), [§06](06-capability-negotiation.md) |
 | **Document** | A signed-artifact wrapper for content attached to an entity (bylaws, resolutions, mandates, attachments). | [§03](03-entity-model.md) |
 | **Event** | An entry in the entity's append-only signed log; the canonical record of state change. | [§03](03-entity-model.md) |
 | **Reference** | A content-addressed pointer (hash + optional resolution hint) to another artifact. | [§03](03-entity-model.md) |
-| **Repository** | A Git repository conforming to [§02](02-repository-structure.md), holding a single Declarative Company entity. | [§02](02-repository-structure.md) |
+| **Repository** | A Git repository conforming to [§02](02-repository-structure.md), holding a single DCP entity. | [§02](02-repository-structure.md) |
 | **Profile** | A jurisdiction-specific binding (e.g. Estonia) that constrains and extends the core specification for that jurisdiction. | [§07](07-versioning.md), [`profiles/`](../../profiles/) |
 | **Conformance** | The property of an artifact, repository, or implementation satisfying the requirements of this specification at the level claimed (Core or profile). | [§00](00-introduction.md), [§07](07-versioning.md) |
-| **Programmable-layer specification** | The future runtime/interaction specification of the project, complement to Declarative Company. Out of scope for this draft. | [`../../README.md`](../../README.md) |
+| **Programmable-layer specification** | The future runtime/interaction specification of the project, complement to DCP. Out of scope for this draft. | [`../../README.md`](../../README.md) |
 
 The term **agent**, where it appears in this specification, refers to any non-human party acting on or against an entity — automated tooling, a Claude or other large-language-model instance, an integration service. It does not refer to a legal agent in the company-law sense, except where that is made explicit.
 

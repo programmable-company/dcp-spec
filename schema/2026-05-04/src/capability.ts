@@ -3,10 +3,9 @@ import type { CapabilityId, SemVer } from "./primitives.js";
 /**
  * Declaration that an entity supports a given capability.
  *
- * Capabilities are the unit of opt-in functionality in the Declarative
- * Company specification. The `core/identity` and `core/lifecycle`
- * capabilities are mandatory for every conforming entity; everything else
- * is opt-in.
+ * Capabilities are the unit of opt-in functionality in DCP. The
+ * `core/identity` and `core/lifecycle` capabilities are mandatory for every
+ * conforming entity; everything else is opt-in.
  *
  * The semantics of each capability — the artifacts it requires, the events
  * it emits, the runtime interactions it implies — are defined by the
@@ -34,8 +33,8 @@ export interface Capability {
 
   /**
    * Capability-specific configuration parameters. The shape is defined by
-   * the capability specification. Declarative Company itself imposes no
-   * constraint beyond JCS-canonicalizable JSON.
+   * the capability specification. DCP itself imposes no constraint beyond
+   * JCS-canonicalizable JSON.
    */
   params?: Record<string, unknown>;
 }

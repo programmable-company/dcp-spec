@@ -1,8 +1,8 @@
 # 05 — Signing
 
-Declarative Company artifacts are signed using JSON Web Signatures ([RFC 7515](https://www.rfc-editor.org/rfc/rfc7515), "JWS") in the JAdES profile ([ETSI TS 119 182-1](https://www.etsi.org/deliver/etsi_ts/119100_119199/11918201/), "JAdES"). JAdES is the JSON-form analogue of CAdES/XAdES; it is the format eIDAS-aligned trust services produce and verify.
+Declarative Company Protocol (DCP) artifacts are signed using JSON Web Signatures ([RFC 7515](https://www.rfc-editor.org/rfc/rfc7515), "JWS") in the JAdES profile ([ETSI TS 119 182-1](https://www.etsi.org/deliver/etsi_ts/119100_119199/11918201/), "JAdES"). JAdES is the JSON-form analogue of CAdES/XAdES; it is the format eIDAS-aligned trust services produce and verify.
 
-This section specifies how those formats are applied to Declarative Company artifacts.
+This section specifies how those formats are applied to DCP artifacts.
 
 ## Signature placement
 
@@ -25,7 +25,7 @@ For transports where sidecars are inconvenient (single-file uploads, message env
 }
 ```
 
-Embedded form is permitted only at the boundary; the canonical representation in a Declarative Company repository is the unwrapped artifact + sidecar `.jws`. Tooling that produces the embedded form for transport MUST be able to convert back to unwrapped form at the destination, and verifiers MUST treat embedded and sidecar signatures over the same canonicalized bytes as equivalent.
+Embedded form is permitted only at the boundary; the canonical representation in a DCP repository is the unwrapped artifact + sidecar `.jws`. Tooling that produces the embedded form for transport MUST be able to convert back to unwrapped form at the destination, and verifiers MUST treat embedded and sidecar signatures over the same canonicalized bytes as equivalent.
 
 ## JWS form
 
@@ -54,7 +54,7 @@ The JWS `protected` header MUST contain at least:
 | `b64` | `false`. Indicates detached payload (RFC 7797). |
 | `crit` | MUST include `"b64"` and any JAdES-specific headers used. |
 | `kid` | Stable key identifier. Profiles bind the form to their identity infrastructure. |
-| `cty` | `application/dc+json` for Declarative Company JSON artifacts. |
+| `cty` | `application/dcp+json` for DCP JSON artifacts. |
 
 JAdES-specific headers are encoded under the `etsiU` (unsigned) and `etsiP` (signed/protected) namespaces per ETSI TS 119 182-1. The `2026-05-04` draft requires only the `etsiU.x5t#S256` (signing certificate digest) header at the **B-B** baseline; further levels are deferred (see *JAdES level* below).
 
@@ -73,7 +73,7 @@ Other algorithms (HS-*, EdDSA over Ed25519, etc.) MUST NOT be used. They are exc
 
 ## Key identifiers
 
-The `kid` claim is a stable identifier for the signing key. Declarative Company itself imposes no internal structure on the `kid` string beyond uniqueness within a producer's signing infrastructure.
+The `kid` claim is a stable identifier for the signing key. DCP itself imposes no internal structure on the `kid` string beyond uniqueness within a producer's signing infrastructure.
 
 Profiles bind `kid` to their identity infrastructure. The Estonia profile (see [`profiles/estonia/`](../../profiles/estonia/)) defines `kid` forms for Smart-ID, Mobile-ID, and the Estonian eID card.
 
@@ -114,7 +114,7 @@ For the Estonia profile, the acceptable TSPs are those listed on the Estonian Tr
 
 ## What signatures protect, and what they do not
 
-A valid Declarative Company signature establishes:
+A valid DCP signature establishes:
 
 - The signed bytes were produced by the holder of the key identified by `kid`.
 - The signed bytes have not been altered since signing (within the bounds of the canonicalization rules).
@@ -128,7 +128,7 @@ A valid signature does **not** establish:
 
 ## Counter-signatures and multi-party signing
 
-A document may need multiple signatures — a board resolution signed by every board member, a contract signed by both parties. Declarative Company expresses these as **separate sidecar files**, one per signer:
+A document may need multiple signatures — a board resolution signed by every board member, a contract signed by both parties. DCP expresses these as **separate sidecar files**, one per signer:
 
 ```
 documents/<doc-id>/document.json

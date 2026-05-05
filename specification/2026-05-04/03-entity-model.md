@@ -4,6 +4,8 @@ This section defines the core entity types — Entity, Identifier, Capability, D
 
 ## Reference
 
+> *DCP* abbreviates *Declarative Company Protocol* throughout this section.
+
 A `Reference` is a content-addressed pointer to another artifact. Its definition lives in [`schema/2026-05-04/src/reference.ts`](../../schema/2026-05-04/src/reference.ts).
 
 ```json
@@ -59,7 +61,7 @@ Every conformant entity MUST declare at least:
 
 A repository's full capability set is the `capabilities` field of `entity.json`. Capability negotiation, the discovery cache, and version compatibility are described in [§06](06-capability-negotiation.md).
 
-The `params` field is capability-specific. Declarative Company itself imposes no constraint on its contents beyond JCS-canonicalizable JSON (see [§04](04-canonicalization.md)).
+The `params` field is capability-specific. DCP itself imposes no constraint on its contents beyond JCS-canonicalizable JSON (see [§04](04-canonicalization.md)).
 
 ## Document
 
@@ -134,7 +136,7 @@ Downstream capability specifications introduce additional event types under thei
 
 ### Why projection, not document
 
-A Declarative Company's authoritative state is the event log; `entity.json` is a derivative. This rule exists because:
+A DCP repository's authoritative state is the event log; `entity.json` is a derivative. This rule exists because:
 
 - The log is the only structure that can record *when* a fact became true. A document at HEAD records only what is true now.
 - The log is what an external party (a court, a registry, a counterparty) replays to settle disputes about what was true at a given moment.
@@ -148,7 +150,7 @@ The `Entity` is the projection of the company at HEAD. Its definition lives in [
 
 ```json
 {
-  "$schema": "https://programmable-company.org/schema/2026-05-04/schema.json",
+  "$schema": "https://programmable.company/declarative-company-protocol/2026-05-04/schema.json",
   "$specVersion": "2026-05-04",
   "id": "pc:ee:registrikood:14123456",
   "profile": "estonia",

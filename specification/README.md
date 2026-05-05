@@ -2,13 +2,13 @@
 
 Specifications under the Programmable Company project live in dated subdirectories under this directory. Each draft is frozen once published; substantive changes go in a new dated directory.
 
-The current specification is **Declarative Company** — the data-layer specification. The future runtime/interaction layer (the *programmable-layer specification*) will be drafted once the data layer stabilizes; it is not in scope for this directory today.
+The current specification is the **Declarative Company Protocol** (DCP), the data layer. The future runtime/interaction layer (the *programmable-layer specification*) will be drafted once the data layer stabilizes; it is not in scope for this directory today.
 
 ## Drafts
 
 | Date | Specification | Status | Notes |
 | --- | --- | --- | --- |
-| [`2026-05-04/`](2026-05-04/) | Declarative Company | Pre-alpha | First draft. Defines the data substrate: repository structure, entity model, JCS canonicalization, JWS/JAdES signing, capability negotiation, versioning. |
+| [`2026-05-04/`](2026-05-04/) | Declarative Company Protocol (DCP) | Pre-alpha | First draft. Defines the data substrate: repository structure, entity model, JCS canonicalization, JWS/JAdES signing, capability negotiation, versioning. |
 
 ## Companion artifacts
 

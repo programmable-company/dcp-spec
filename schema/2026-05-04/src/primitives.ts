@@ -1,5 +1,5 @@
 /**
- * Primitive types used throughout the Declarative Company schema.
+ * Primitive types used throughout the Declarative Company Protocol (DCP) schema.
  *
  * These are nominal aliases over `string` chosen for documentation and
  * generated-schema clarity; they do not perform runtime validation.
@@ -17,8 +17,8 @@
 export type Iso8601Date = string;
 
 /**
- * RFC 3339 / ISO 8601 date-time with explicit timezone designator. Declarative
- * Company timestamps MUST be UTC and SHOULD use the `Z` suffix.
+ * RFC 3339 / ISO 8601 date-time with explicit timezone designator. DCP
+ * timestamps MUST be UTC and SHOULD use the `Z` suffix.
  *
  * @pattern ^\d{4}-\d{2}-\d{2}T\d{2}:\d{2}:\d{2}(\.\d+)?(Z|[+-]\d{2}:\d{2})$
  * @format date-time
@@ -51,7 +51,7 @@ export type Uri = string;
 export type SpecVersion = string;
 
 /**
- * Stable identifier for a Declarative Company entity. The recommended form is
+ * Stable identifier for a DCP entity. The recommended form is
  * a `pc:` URN — owned by the Programmable Company project and shared across
  * the project's specifications — with a content-addressable suffix derived
  * from the entity's genesis event. Profiles MAY define alternative forms

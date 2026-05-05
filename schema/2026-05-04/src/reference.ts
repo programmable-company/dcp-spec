@@ -23,10 +23,10 @@ export interface Reference {
   hashAlg: "sha-256";
 
   /**
-   * Optional resolution hint. May be a relative path within the same
-   * Declarative Company repository (e.g. `events/2026/2026-05-04-genesis.json`)
-   * or any RFC 3986 URI. Resolvers MUST verify the resolved bytes against
-   * `hash` before treating them as authoritative.
+   * Optional resolution hint. May be a relative path within the same DCP
+   * repository (e.g. `events/2026/2026-05-04-genesis.json`) or any RFC 3986
+   * URI. Resolvers MUST verify the resolved bytes against `hash` before
+   * treating them as authoritative.
    */
   uri?: Uri;
 

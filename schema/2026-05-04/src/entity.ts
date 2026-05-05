@@ -10,7 +10,7 @@ import type { Capability } from "./capability.js";
 import type { Reference } from "./reference.js";
 
 /**
- * The Entity document — the declarative projection of a Declarative Company.
+ * The Entity document — the declarative projection of a DCP repository.
  *
  * An Entity document at HEAD describes the company's *current state* as
  * derived from the append-only event log. It is provided for ergonomics:
@@ -28,7 +28,7 @@ export interface Entity {
    * JSON Schema URI. Optional; included by convention so that editors and
    * validators can resolve the schema without out-of-band configuration.
    *
-   * @example "https://programmable-company.org/declarative-company/2026-05-04/schema.json"
+   * @example "https://programmable.company/declarative-company-protocol/2026-05-04/schema.json"
    */
   $schema?: Uri;
 

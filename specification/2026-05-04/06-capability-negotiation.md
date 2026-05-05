@@ -1,6 +1,6 @@
 # 06 — Capability negotiation
 
-A Declarative Company is more than the substrate types defined in [§03](03-entity-model.md). Real entities have governance, accounting obligations, employment relationships, mandate structures — and each of those is a separate body of model and behavior. To keep the core specification small while permitting that richness, Declarative Company uses a **capability-negotiation** pattern: every entity declares which capabilities (modules) it exposes, and consumers act according to that declaration.
+A DCP repository is more than the substrate types defined in [§03](03-entity-model.md). Real entities have governance, accounting obligations, employment relationships, mandate structures — and each of those is a separate body of model and behavior. To keep the core specification small while permitting that richness, DCP uses a **capability-negotiation** pattern: every entity declares which capabilities (modules) it exposes, and consumers act according to that declaration.
 
 This section defines how capabilities are declared, discovered, and negotiated. It does **not** define any non-core capability — those live in their own module specifications. It defines the substrate for them.
 
@@ -92,6 +92,6 @@ A capability declaration says: *the entity is prepared to be acted on under the 
 
 ## Why this pattern
 
-Capability negotiation lets the core specification stay small. A bare-minimum Declarative Company has only `core/identity` and `core/lifecycle` declared; that is sufficient to be addressable, identifiable, and auditable. Real-world entities will declare more, but they do so on their own terms, on their own timetable, and in their own jurisdiction's flavors.
+Capability negotiation lets the core specification stay small. A bare-minimum DCP repository has only `core/identity` and `core/lifecycle` declared; that is sufficient to be addressable, identifiable, and auditable. Real-world entities will declare more, but they do so on their own terms, on their own timetable, and in their own jurisdiction's flavors.
 
 This is also how the specification grows. A new module specification — say, `accounting/v1` — is published as its own document under its own SEP. Existing entities adopt it by emitting a `core.lifecycle.capability-added` event; consumers that want to act under the new module update their tooling. Neither the core specification nor the existing capabilities of an entity need to change for a new module to land.
